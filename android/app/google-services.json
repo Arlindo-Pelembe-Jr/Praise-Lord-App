@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "1094463610238",
+    "project_id": "devocional-7ecac",
+    "storage_bucket": "devocional-7ecac.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1094463610238:android:f63c3f81fa99e6bd01672f",
+        "android_client_info": {
+          "package_name": "com.example.Praise_Lord"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1094463610238-khdnltsalsgqj4dj6jg8bn89fjl3li86.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6PDEW5hCDXTCIqW7PIuoZxOLbpPE5RIs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1094463610238-khdnltsalsgqj4dj6jg8bn89fjl3li86.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1094463610238:android:4f0e345297c71c5d01672f",
+        "android_client_info": {
+          "package_name": "com.example.Praise_Lord_Admin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1094463610238-khdnltsalsgqj4dj6jg8bn89fjl3li86.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6PDEW5hCDXTCIqW7PIuoZxOLbpPE5RIs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1094463610238-khdnltsalsgqj4dj6jg8bn89fjl3li86.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
