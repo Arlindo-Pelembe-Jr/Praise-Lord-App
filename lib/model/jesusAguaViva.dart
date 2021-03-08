@@ -17,67 +17,67 @@ class CapaJesusRepo{
         categoria: Categoria.amor,
         titulo: 'O Amor De Deus',
         subTitulo: 'Dê graças ao Senhor, porque Ele é bom.\n O Seu amor dura para sempre',
-        img: 'assets/cruz.png'
+        img: 'assets/O Amor de Deus.jpg'
       ),
       CapaJesus(
         categoria: Categoria.confianca,
         titulo: 'Confiança em Deus',
         subTitulo: 'Feliz é aquele que confia a sua vida no Senhor, refúgio de todo que O busca.',
-        img: 'assets/cruz.png'
+        img: 'assets/Confiança.jpg'
       ),
       CapaJesus(
         categoria: Categoria.conversao,
         titulo: 'Arrependimento e Conversão',
         subTitulo: 'Arrependa-te e converta-te, para que sejam apagados os teus pecados.',
-        img: 'assets/cruz.png'
+        img: 'assets/arrependiemento.jpg'
       ),  
       CapaJesus(
         categoria: Categoria.coracao,
         titulo: 'O Coração do Homem',
         subTitulo: 'Esta é a única maneira de falar com Deus, Use-a com diligência.',
-        img: 'assets/cruz.png'
+        img: 'assets/O coração do Homem.jpg'
       ),  
       CapaJesus(
         categoria: Categoria.eterna,
         titulo: 'Vida Eterna',
         subTitulo: 'Jesus é o caminho, a Verdade e a Vida.\n Ninguém chega ao Pai senão através dEle.',
-        img: 'assets/cruz.png'
+        img: 'assets/Vida eterna.jpg'
       ),  
       CapaJesus(
         categoria: Categoria.fe,
         titulo: 'Fé em Deus',
         subTitulo: 'A Fé que deve ser em Deus, unicamente Nele.',
-        img: 'assets/cruz.png'
+        img: 'assets/Fé.jpg'
       ),
       CapaJesus(
         categoria: Categoria.libertacao,
         titulo: 'Libertação',
         subTitulo: 'E conhecereis a Verdade e a Verdade ti libertará. Jesus é a Verdade que Liberta.',
-        img: 'assets/cruz.png'
+        img: 'assets/LIbertação.jpg'
       ), 
       CapaJesus(
         categoria: Categoria.oracao,
         titulo: 'Oração e Jejum',
         subTitulo: 'A Fé que deve ser em Deus, unicamente nEle.',
-        img: 'assets/cruz.png'
+        img: 'assets/Oração e Jejum.jpg'
       ),
       CapaJesus(
         categoria: Categoria.pecado,
         titulo: 'Pecado',
         subTitulo: 'Todo aquele que vive pecando é escravo do pecado. Liberte-se dele.',
-        img: 'assets/cruz.png'
+        img: 'assets/pecados.png'
       ),
       CapaJesus(
         categoria: Categoria.salvacao,
         titulo: 'Salvação',
         subTitulo: 'Confessa com a tua boca que Jesus é o Senhor, aceita no teu coração que Deus o ressuscitou dentre os mortos, serás salvo.',
-        img: 'assets/cruz.png'
+        img: 'assets/Salvação.jpg'
       ),
       CapaJesus(
         categoria: Categoria.verdade,
         titulo: 'Deus, A Verdade',
         subTitulo: 'Deus criou tudo: Os céus e até os mais altos céus, a terra e tudo o que nela existe.',
-        img: 'assets/cruz.png'
+        img: 'assets/Deus, a Verdade.jpg'
       ), 
     ];
     if(categoria == Categoria.all){

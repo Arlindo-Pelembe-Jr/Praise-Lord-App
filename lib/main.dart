@@ -1,6 +1,7 @@
 
 import 'dart:async';
 
+import 'package:Praise_Lord/helpers/constants.dart';
 import 'package:Praise_Lord/utils/notficationPlugin.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -75,8 +76,11 @@ Future <void> main() async{
 // }
 
 class MyApp extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
+  precacheImage(AssetImage(backgroundImage), context);
+
     return MaterialApp(
       title: 'Praise Lord App',
       theme: ThemeData(
@@ -85,6 +89,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: HomePage(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }

@@ -37,6 +37,8 @@ dependencies:
   shared_preferences: ^0.5.7
   rxdart: ^0.24.1     
   flutter_local_notifications: ^3.0.2   
+  cached_network_image: ^2.5.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -89,6 +91,23 @@ flutter:
     - assets/4Lei.png
     - assets/2Lei.png
     - assets/1Lei.png
+    - assets/arrependiemento.jpg
+    - assets/Confiança.jpg
+    - assets/Deus, a Verdade.jpg
+    - assets/Fé.jpg
+    - assets/LIbertação.jpg
+    - assets/O Amor de Deus.jpg
+    - assets/O coração do Homem.jpg
+    - assets/Oração e Jejum.jpg
+    - assets/Salvação.jpg
+    - assets/Vida eterna.jpg
+    - assets/pecados.png
+    - assets/praiseLord.png
+    - assets/1Lei.png
+    - assets/1Lei.png
+    - assets/1Lei.png
+    - assets/1Lei.png
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

@@ -4,15 +4,15 @@ import 'package:Praise_Lord/model/jesusAguaViva.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
-class DetailPage extends StatefulWidget {
-  DetailPage(this.enumCategoria,this.strCategoria);
+class DetailPage1 extends StatefulWidget {
+  DetailPage1(this.enumCategoria,this.strCategoria);
   String strCategoria; Categ enumCategoria;
   @override
-  _DetailPageState createState() => _DetailPageState(this.enumCategoria,this.strCategoria);
+  _DetailPage1State createState() => _DetailPage1State(this.enumCategoria,this.strCategoria);
 }
 
-class _DetailPageState extends State<DetailPage> {
-  _DetailPageState(this.verficationeEnum,this.title);
+class _DetailPage1State extends State<DetailPage1> {
+  _DetailPage1State(this.verficationeEnum,this.title);
    String title; Categ verficationeEnum;
    EvangelhoRepository evangelhoRepository = new EvangelhoRepository();
      List<Evangelho> evg ;  int count=0;  
@@ -136,18 +136,23 @@ class _PageListTitleState extends State<PageListTitle> {
           padding: EdgeInsets.all(8),
           itemCount: count, 
           itemBuilder:(context, index){
-            return ListTile( 
-              title: Text(  
-                '${index+1}. '+listJesus[index].tema,
-                 style: TextStyle( 
-                       fontSize: 22.0,
-                       fontWeight: FontWeight.bold,
-                     ),
-                     
+            return Container(
+              decoration: BoxDecoration( 
+                color:Colors.blueGrey,
               ),
-              onTap: (){
+              child: ListTile( 
+                title: Text(  
+                  '${index+1}. '+listJesus[index].tema,
+                   style: TextStyle( 
+                         fontSize: 22.0,
+                         fontWeight: FontWeight.bold,
+                       ),
+                       
+                ),
+                onTap: (){
 Navigator.push(context,MaterialPageRoute(builder: (context)=> ReaderPage(listJesus[index].categoriaN, listJesus[index].versoDia, listJesus[index].mensagem)));
-              },
+                },
+              ),
             );
           },
           ),

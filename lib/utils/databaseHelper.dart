@@ -91,3 +91,44 @@
 //       return devoList;
 //     }
 //   }
+
+
+// Future<int> createCustomer(Customer customer) async {
+//   var result = await database.insert("Customer", customer.toMap());
+//   return result;
+// }
+
+// Future<List> getCustomers() async {
+//   var result = await database.query("Customer", columns: ["id", "first_name", "last_name", "email"]);
+
+//   return result.toList();
+// }
+
+
+// Future<Customer> getCustomer(int id) async {
+//   List<Map> results = await db.query("Customer",
+//       columns: ["id", "first_name", "last_name", "email"],
+//       where: 'id = ?',
+//       whereArgs: [id]);
+
+//   if (results.length > 0) {
+//     return new Customer.fromMap(results.first);
+//   }
+
+//   return null;
+// }
+
+// Future<int> updateCustomer(Customer customer) async {
+//   return await database.update("Customer", customer.toMap(), where: "id = ?", whereArgs: [customer.id]);
+// }
+
+// Future<int> deleteCustomer(int id) async {
+//   return await database.delete("Customer", where: 'id = ?', whereArgs: [id]);
+// }
+
+// createCustomer(Customer customer) async {
+//     var result = await database.rawInsert(
+//       "INSERT INTO Customer (id,first_name, last_name, email)"
+//       " VALUES (${customer.id},${customer.firstName},${customer.lastName},${customer.email})");
+//     return result;
+//   }

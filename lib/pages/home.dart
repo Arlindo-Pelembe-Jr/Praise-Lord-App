@@ -1,33 +1,109 @@
 
+import 'package:Praise_Lord/helpers/constants.dart';
 import 'package:Praise_Lord/model/evangelho.dart';
 import 'package:Praise_Lord/model/jesusAguaViva.dart';
-// import 'package:Praise_Lord/pages/notificationPlugin.dart';
+import 'package:Praise_Lord/pages/detail_page.dart';
 import 'package:Praise_Lord/pages/view.dart';
-// import 'package:flutter_local_notifications_platform_interface/src/notification_app_launch_details.dart';
+import 'package:Praise_Lord/widgets/custom_button.dart';
 import '../main.dart';
 import 'devocionalDay.dart';
 import 'package:flutter/material.dart';
-// import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'localNotificationScreen.dart';
 import 'package:Praise_Lord/utils/notficationPlugin.dart';
+import 'package:Praise_Lord/widgets/card.dart';
 
 
-// import 'package:Praise_Lord/utils/databaseHelper.dart';
-
-
-// String ctg,catego;  Categ cteg; Categoria catgoria; 
 class HomePage extends StatefulWidget {
-  final  Categ categ; final Categoria categoria;
-  HomePage({this.categ:Categ.all,this.categoria:Categoria.all});
   @override
   _HomePageState createState() => _HomePageState();
 }
+
 class _HomePageState extends State<HomePage> {
+  @override
+  Widget build(BuildContext context) {
+    return  Scaffold( 
+            // appBar: AppBar( 
+            //   title:Text('Praise Lord'),
+            // ),
+            body: Stack(
+            children: [
+               Image.asset(
+               backgroundImage,
+               height: MediaQuery.of(context).size.height,
+               width: MediaQuery.of(context).size.width,
+               fit: BoxFit.cover,
+              ),
+                Container(
+                    // color: Colors.white12,
+                    padding: EdgeInsets.all(5),
+                    margin: EdgeInsets.only(
+                        top: MediaQuery.of(context).size.height / 20,
+                        left: MediaQuery.of(context).size.width / 500),
+                    child:Row(
+                      children: [
+                        Text('Praise Lord'),
+                      ],
+                    ),
+                  ),
+                 Container(
+                    alignment: Alignment.center,
+                    height: MediaQuery.of(context).size.height,
+                    margin: EdgeInsets.fromLTRB(18, MediaQuery.of(context).size.height/2.1, 18, 0),
+                    child: GridView.count(
+                              mainAxisSpacing: 4,
+                              crossAxisSpacing: 4,
+                              padding: EdgeInsets.all(8),
+                              crossAxisCount: 2,
+                              children: [
+                                CustomButton(
+                                  title: 'Devocional–Dia',
+                                  onTap: (){
+                                    print('tap');
+                                  },
+                                ),
+                                CustomButton(
+                                  title: 'Evangelho',
+                                  onTap: (){
+                                    print('tap');
+                                  },
+                                ),
+                                CustomButton(
+                                  title: 'Meditação',
+                                  onTap: (){
+                                   Navigator.of(context).push(MaterialPageRoute(builder: (context)=>DetailPage()));
+
+                                    print('tap');
+                                  },
+                                ),
+                                CustomButton(
+                                  title: 'Definições',
+                                  onTap: (){
+                                    print('tap');
+                                  },
+                                ),
+
+                              ],
+                              ),
+                    
+                         
+                    
+                       )
+                          ]
+            ),
+          );
+  }
+}
+class Home extends StatefulWidget {
+  final  Categ categ; final Categoria categoria;
+  Home({this.categ:Categ.all,this.categoria:Categoria.all});
+  @override
+  _HomeState createState() => _HomeState();
+}
+class _HomeState extends State<Home> {
 
  
    final  Categ categ;   Categoria categoria;
     CatgRepository catgRepository = new CatgRepository(); CapaJesusRepo capaJesusRepo = new CapaJesusRepo();
-  _HomePageState( {this.categ:Categ.all,this.categoria:Categoria.all});
+  _HomeState( {this.categ:Categ.all,this.categoria:Categoria.all});
      List<Catg> cate ;  int count=0,tamanho=0; List<CapaJesus> capaJesus;
  //  final NotificationAppLaunchDetails notificationAppLaunchDetails;
         
@@ -123,51 +199,11 @@ class _HomePageState extends State<HomePage> {
                       //  print(catego);
                       //  downloadFirestore();
             },
-           child: Card(
-            
-            // shape: ShapeBorder.,
-            color: Colors.white70,
-            child: Column( 
-              children: <Widget>[ 
-                SizedBox(
-                  height: 120.0,
-                  child: Stack( 
-                    children: <Widget>[ 
-                      Positioned.fill(
-                        bottom: 35.0, 
-                        child: Image.asset(
-                           this.capaJesus[index].img,
-                          // 'assets/The Four.png', 
-                          fit: BoxFit.fill,
-                          ),
-                        ),
-                        Positioned(
-                          bottom: 5.0,
-                          left: 8.0,
-                          right: 15.0,
-                          child: FittedBox( 
-                            fit: BoxFit.scaleDown,
-                            alignment:Alignment.bottomLeft,
-                            child: Text( 
-                              this.capaJesus[index].titulo,
-                              style: Theme.of(context)
-                              .textTheme 
-                              .headline6 
-                              .copyWith(color:Colors.black),
-                              ),
-                          ), 
-                          ),
-                    ],
-                    
-                    ),
-                ),
-                Padding( 
-                  padding: EdgeInsets.all(8),
-                  child: Text(this.capaJesus[index].subTitulo),
-                  ),
-              ],
-            ),
-          ),
+           child: CustomCard(
+             image: this.capaJesus[index].img,
+             title:this.capaJesus[index].titulo,
+             subtitle: this.capaJesus[index].subTitulo,
+           ),
           
           );
      }, 
@@ -183,51 +219,14 @@ class _HomePageState extends State<HomePage> {
           return  InkWell( 
             onTap: (){
               // ctg=this.cate[i].catg;
-  Navigator.push(context, MaterialPageRoute(builder: (BuildContext context)=>DetailPage(this.cate[i].categ,this.cate[i].catg)));
+  Navigator.push(context, MaterialPageRoute(builder: (BuildContext context)=>DetailPage1(this.cate[i].categ,this.cate[i].catg)));
                       // cteg= this.cate[i].categ;
                       //  print(cteg);
             },
-           child: Card(
-            
-            // shape: ShapeBorder.,
-            color: Colors.white70,
-            child: Column( 
-              children: <Widget>[ 
-                SizedBox(
-                  height: 120.0,
-                  child: Stack( 
-                    children: <Widget>[ 
-                      Positioned.fill(
-                        bottom: 35.0, 
-                        child: Image.asset(
-                           this.cate[i].img,
-                          // 'assets/The Four.png', 
-                          fit: BoxFit.contain,
-                          ),
-                        ),
-                        Positioned(
-                          bottom: 5.0,
-                          left: 8.0,
-                          right: 15.0,
-                          child: FittedBox( 
-                            fit: BoxFit.scaleDown,
-                            alignment:Alignment.bottomLeft,
-                            child: Text( 
-                              cate[i].catg,
-                              style: Theme.of(context)
-                              .textTheme 
-                              .headline6 
-                              .copyWith(color:Colors.black),
-                              ),
-                          ), 
-                          ),
-                    ],
-                    
-                    ),
-                ), 
-              ],
-            ),
-          ),
+           child: CustomCard(
+             title: this.cate[i].catg,
+             image: this.cate[i].img,
+             ),
           
           );
       },
