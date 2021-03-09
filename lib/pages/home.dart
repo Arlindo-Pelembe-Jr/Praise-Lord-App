@@ -10,6 +10,7 @@ import 'devocionalDay.dart';
 import 'package:flutter/material.dart';
 import 'package:Praise_Lord/utils/notficationPlugin.dart';
 import 'package:Praise_Lord/widgets/card.dart';
+import 'page_post.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -57,6 +58,8 @@ class _HomePageState extends State<HomePage> {
                                 CustomButton(
                                   title: 'Devocional–Dia',
                                   onTap: (){
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>DevocionalDay()));
+
                                     print('tap');
                                   },
                                 ),
@@ -77,6 +80,14 @@ class _HomePageState extends State<HomePage> {
                                 CustomButton(
                                   title: 'Definições',
                                   onTap: (){
+                                    print('tap');
+                                  },
+                                ),
+                                 CustomButton(
+                                  title: 'Post',
+                                  onTap: (){
+                           Navigator.of(context).push(MaterialPageRoute(builder: (context)=>PagePost()));
+  
                                     print('tap');
                                   },
                                 ),

@@ -1,6 +1,7 @@
 import 'package:Praise_Lord/utils/notficationPlugin.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:styled_text/styled_text.dart';
 
 
 
@@ -31,24 +32,49 @@ class _DevocionalDayState extends State<DevocionalDay> {
           // Text('ID: $id'),
           // Divider(height: 5,),
           SizedBox(height: 8,),
-          Text(
-            // tema,
-            '${devocional['tema']}',
-           style: TextStyle( 
+           StyledText(
+              text: '${devocional['tema']}',
+               style: TextStyle( 
                        fontSize: 22.6,
-                       fontWeight: FontWeight.bold,
-                     ),
-                     ),
-          SizedBox(height: 8,),
-          // Divider(height: 5,),
-          Text(
-            // mensagem,
-            '${devocional['mensagem']}',
-             style: TextStyle( 
-                       fontSize: 18.6,
                       //  fontWeight: FontWeight.bold,
                      ),
+              styles: {
+                'b': TextStyle(
+                  fontWeight: FontWeight.bold
+                  ),
+              },
+            ),
+          // Text(
+          //   // tema,
+          //   '${devocional['tema']}',
+          //  style: TextStyle( 
+          //              fontSize: 22.6,
+          //              fontWeight: FontWeight.bold,
+          //            ),
+          //            ),
+          SizedBox(height: 8,),
+            StyledText(
+              text: """${devocional['mensagem']}""",
+              newLineAsBreaks: true,
+              style: TextStyle( 
+                       fontSize: 22.6,
+                      //  fontWeight: FontWeight.bold,
                      ),
+              styles: {
+                'b': TextStyle(
+                  fontWeight: FontWeight.bold
+                  ),
+              },
+            ),
+          // Divider(height: 5,),
+          // Text(
+          //   // mensagem,
+          //   '${devocional['tema']}',
+          //    style: TextStyle( 
+          //              fontSize: 18.6,
+          //             //  fontWeight: FontWeight.bold,
+          //            ),
+          //            ),
           SizedBox(height: 8,),
           // Divider(height: 5,),
           Text(
@@ -64,10 +90,10 @@ class _DevocionalDayState extends State<DevocionalDay> {
     );
   }
  downladDevo(){
- CollectionReference devo = FirebaseFirestore.instance.collection('Devocional');
+ CollectionReference devo = FirebaseFirestore.instance.collection('devocionais_diarios');
   return devo.snapshots(includeMetadataChanges: true).listen((snapshot) {  
     setState(() {
-     devocional = snapshot.docs[1].data(); 
+     devocional = snapshot.docs[0].data(); 
      showNotificationWithNoBody();
     //  id = snapshot.docs[1].id;
     });
