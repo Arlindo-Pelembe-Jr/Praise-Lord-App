@@ -26,66 +26,73 @@ class _DevocionalDayState extends State<DevocionalDay> {
       appBar: AppBar(  
         title: Text('Devocional Dia'),
       ),
-      body: ListView(  
-        padding: EdgeInsets.all(15),
-        children: [ 
-          // Text('ID: $id'),
-          // Divider(height: 5,),
-          SizedBox(height: 8,),
-           StyledText(
-              text: '${devocional['tema']}',
-               style: TextStyle( 
-                       fontSize: 22.6,
-                      //  fontWeight: FontWeight.bold,
-                     ),
-              styles: {
-                'b': TextStyle(
-                  fontWeight: FontWeight.bold
+      body: SingleChildScrollView(
+              child: Container(
+          padding: EdgeInsets.all(18),
+          // margin: EdgeInsets.fromLTRB(8, MediaQuery.of(context).size.height/20, 8, 0),
+
+          child: Column(  
+              children: [ 
+                // Text('ID: $id'),
+                // Divider(height: 5,),
+                // SizedBox(height: 8,),
+                //  StyledText(
+                //     text: '${devocional['tema']}',
+                //      style: TextStyle( 
+                //              fontSize: 22.6,
+                //             //  fontWeight: FontWeight.bold,
+                //            ),
+                //     styles: {
+                //       'b': TextStyle(
+                //         fontWeight: FontWeight.bold
+                //         ),
+                //     },
+                //   ),
+                Text(
+                  // tema,
+                  '${devocional['tema']}',
+                 style: TextStyle( 
+                             fontSize: 22.6,
+                             fontWeight: FontWeight.bold,
+                           ),
+                           ),
+                SizedBox(height: 8,),
+                  StyledText(
+                    text: """${devocional['mensagem']}""",
+                    newLineAsBreaks: true,
+                    style: TextStyle( 
+                             fontSize: 20.6,
+                            //  fontWeight: FontWeight.bold,
+                           ),
+                    styles: {
+                      'b': TextStyle(
+                        fontWeight: FontWeight.bold
+                        ),
+                    },
                   ),
-              },
+                // Divider(height: 5,),
+                // Text(
+                //   // mensagem,
+                //   '${devocional['tema']}',
+                //    style: TextStyle( 
+                //              fontSize: 18.6,
+                //             //  fontWeight: FontWeight.bold,
+                //            ),
+                //            ),
+                SizedBox(height: 8,),
+                // Divider(height: 5,),
+                Text(
+                  //  'Autor: $autor',
+                  'Autor: ${devocional['autor']}',
+                   style: TextStyle( 
+                             fontSize: 16.6,
+                            //  fontWeight: FontWeight.bold,
+                           ),
+                  )
+              ],
             ),
-          // Text(
-          //   // tema,
-          //   '${devocional['tema']}',
-          //  style: TextStyle( 
-          //              fontSize: 22.6,
-          //              fontWeight: FontWeight.bold,
-          //            ),
-          //            ),
-          SizedBox(height: 8,),
-            StyledText(
-              text: """${devocional['mensagem']}""",
-              newLineAsBreaks: true,
-              style: TextStyle( 
-                       fontSize: 22.6,
-                      //  fontWeight: FontWeight.bold,
-                     ),
-              styles: {
-                'b': TextStyle(
-                  fontWeight: FontWeight.bold
-                  ),
-              },
-            ),
-          // Divider(height: 5,),
-          // Text(
-          //   // mensagem,
-          //   '${devocional['tema']}',
-          //    style: TextStyle( 
-          //              fontSize: 18.6,
-          //             //  fontWeight: FontWeight.bold,
-          //            ),
-          //            ),
-          SizedBox(height: 8,),
-          // Divider(height: 5,),
-          Text(
-            //  'Autor: $autor',
-            'Autor: ${devocional['autor']}',
-             style: TextStyle( 
-                       fontSize: 16.6,
-                      //  fontWeight: FontWeight.bold,
-                     ),
-            )
-        ],
+          
+        ),
       ),
     );
   }
