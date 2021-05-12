@@ -130,6 +130,7 @@ class _PagePostState extends State<PagePost> {
             'autor'    : _controllerAutor.text})
           .then((value) {
                 Navigator.pop(context);
+            // ignore: deprecated_member_use
             Scaffold.of(context).showSnackBar(SnackBar(content: Text("Devocional publicado"),));
 
           }) 

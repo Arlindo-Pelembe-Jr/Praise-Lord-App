@@ -7,6 +7,7 @@ import 'package:Praise_Lord/services/meditacao_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class DetailPage extends StatefulWidget {
   String categoria;
   DetailPage({this.categoria});
@@ -39,6 +40,7 @@ class _DetailPageState extends State<DetailPage> {
                         top: MediaQuery.of(context).size.height / 20,
                         left: MediaQuery.of(context).size.width / 500),
                     child:
+                        // ignore: deprecated_member_use
                         FlatButton(
                         onPressed: () => Navigator.pop(context),
                         child: Icon(
@@ -97,6 +99,7 @@ class _DetailPageState extends State<DetailPage> {
   }
 }
 
+// ignore: must_be_immutable
 class Content extends StatefulWidget {
   String categoria;
   Content({this.categoria});
@@ -132,6 +135,7 @@ class _ContentState extends State<Content> {
                         top: MediaQuery.of(context).size.height / 20,
                         left: MediaQuery.of(context).size.width / 500),
                     child:
+                        // ignore: deprecated_member_use
                         FlatButton(
                         onPressed: () => Navigator.pop(context),
                         child: Icon(

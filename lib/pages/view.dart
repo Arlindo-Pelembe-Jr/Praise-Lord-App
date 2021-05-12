@@ -19,7 +19,7 @@ class _DetailPage1State extends State<DetailPage1> {
      @override
   Widget build(BuildContext context) {
     if(evg == null){
-      evg = List<Evangelho>();
+      evg = [];
       _upd();
     }
     return Scaffold(
@@ -123,7 +123,7 @@ class _PageListTitleState extends State<PageListTitle> {
   @override
   Widget build(BuildContext context) {
     if(listJesus == null){
-      listJesus = List<Jesus>();
+      listJesus = [];
       _updList();
     }
     print(count);

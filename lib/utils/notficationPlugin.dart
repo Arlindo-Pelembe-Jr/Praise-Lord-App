@@ -21,6 +21,7 @@ import '../main.dart';
   @override
   Widget build(BuildContext context) => Padding(
         padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
+        // ignore: deprecated_member_use
         child: RaisedButton(
           onPressed: onPressed,
           child: Text(buttonText),
@@ -334,6 +335,7 @@ class SecondScreenState extends State<SecondScreen> {
           title: Text('Second Screen with payload: ${_payload ?? ''}'),
         ),
         body: Center(
+          // ignore: deprecated_member_use
           child: RaisedButton(
             onPressed: () {
               Navigator.pop(context);

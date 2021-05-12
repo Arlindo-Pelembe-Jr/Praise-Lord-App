@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class CustomCard extends StatelessWidget {
   String image,title,subtitle;
   CustomCard({this.title,this.subtitle,this.image});

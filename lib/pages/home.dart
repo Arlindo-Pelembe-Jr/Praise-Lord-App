@@ -128,8 +128,8 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     if(cate == null && capaJesus == null){
-      cate = List<Catg>();
-      capaJesus = List<CapaJesus>();
+      cate = [];
+      capaJesus = [];
       _upd();
     }
 
