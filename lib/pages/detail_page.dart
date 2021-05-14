@@ -172,17 +172,17 @@ class _ContentState extends State<Content> {
                                                     color: Colors.blue,
                                                     borderRadius: BorderRadius.circular(8),
                                                 ),
-                                               child: Text(list[index].tema),
+                                              //  child: Text(list[index].tema),
                                                  
                                                
                                              ),
                                              onTap: (){
-                                               Navigator.of(context).push(MaterialPageRoute(builder: (context)=> ReaderPage(list[index].tema, '',list[index].mensagem+'\n\n Autor: '+list[index].autor)));
+                                               Navigator.of(context).push(MaterialPageRoute(builder: (context)=> ReaderPage('list[index].tema', '',list[index].mensagem+'\n\n Autor: '+'list[index].autor')));
 
-                                                 print('categoria'+list[index].categoria);
-                                                 print('tema'+list[index].tema);
+                                                //  print('categoria'+list[index].categoria);
+                                                //  print('tema'+list[index].tema);
                                                  print('mensagem:'+list[index].mensagem);
-                                                 print('autor'+list[index].autor);
+                                                //  print('autor'+list[index].autor);
                                                },
                                            ),
                                               SizedBox(height: 8,),

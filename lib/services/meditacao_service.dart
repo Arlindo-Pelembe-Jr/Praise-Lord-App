@@ -1,5 +1,6 @@
 import 'package:Praise_Lord/helpers/constants.dart';
 import 'package:Praise_Lord/model/devocional.dart';
+import 'package:Praise_Lord/model/devocional_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class MeditacaoService{
@@ -11,6 +12,12 @@ class MeditacaoService{
  }
 
 
+    Future<void> addMediitacao(DevocionalModel devocionalModel) async {
+      await meditacao
+            .add(devocionalModel.toJson())
+            .then((value) => print('Meditacao Adicionado'))
+            .catchError((error) => print('Falha ao Adiconar $error'));
+  }
 List<String> getTitulo(QuerySnapshot snapshot){
   List<String> titulo = [];
 

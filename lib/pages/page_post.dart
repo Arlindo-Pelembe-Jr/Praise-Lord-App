@@ -1,4 +1,7 @@
+import 'package:intl/intl.dart';
 
+import 'package:Praise_Lord/model/devocional_model.dart';
+import 'package:Praise_Lord/services/devocional_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -11,11 +14,15 @@ class PagePost extends StatefulWidget {
 
 class _PagePostState extends State<PagePost> {
 
-  TextEditingController _controllerTema = TextEditingController();
+  TextEditingController _controllerTitulo = TextEditingController();
+  // TextEditingController _controllerSubTitulo = TextEditingController();
+  // TextEditingController _controllerImgTop = TextEditingController();
+  // TextEditingController _controllerImgBottom = TextEditingController();
   TextEditingController _controllerMsg=TextEditingController();
   TextEditingController _controllerAutor= TextEditingController();
   String mensagem;
-
+  DevocionalModel devocionalModel = DevocionalModel();
+  DevocionalService devocionalService = new DevocionalService();
  
   
   @override
@@ -41,24 +48,24 @@ class _PagePostState extends State<PagePost> {
                   onPressed: (){
                  
                  
-                   this._controllerMsg.text+='<b></b>';
+                   this._controllerMsg.text+='<b>  </b>';
                   },  
                   child: Text('Bold'),
                   ),
-                   ElevatedButton( 
-                  onPressed: (){
-                  this._controllerMsg.text+='<link href="https://flutter.dev">link</link>';
+                  //  ElevatedButton( 
+                  // onPressed: (){
+                  // this._controllerMsg.text+='<link href="https://flutter.dev">link</link>';
 
-                  },  
-                  child: Text('Link'),
-                  ),
-                    ElevatedButton( 
-                  onPressed: (){
-                  this._controllerMsg.text+='<link href="https://">link</link>';
+                  // },  
+                  // child: Text('Link'),
+                  // ),
+                  //   ElevatedButton( 
+                  // onPressed: (){
+                  // //this._controllerMsg.text+='<link href="https://">link</link>';
 
-                  },  
-                  child: Icon(Icons.image),
-                  ),
+                  // },  
+                  // child: Icon(Icons.image),
+                  // ),
                    ],
                    ),
                ),
@@ -73,16 +80,39 @@ class _PagePostState extends State<PagePost> {
              children: <Widget>[ 
                  
              TextField( 
-               controller: this._controllerTema,
+               controller: this._controllerTitulo,
                decoration: InputDecoration(  
-                 labelText: 'Tema',
+                 labelText: 'Titulo',
                ),
                onChanged: (val){
 
                 //  mensagem =val;
                },
              ),
+            //  SizedBox(height: 15,),
+            //    TextField( 
+            //    controller: this._controllerImgTop,
+            //    decoration: InputDecoration(  
+            //      labelText: 'Imagem Topo',
+            //    ),
+            //    onChanged: (val){
+
+            //     //  mensagem =val;
+            //    },
+            //  ),
              SizedBox(height: 15,),
+            //   TextField( 
+            //    controller: this._controllerSubTitulo,
+            //    decoration: InputDecoration(  
+            //      labelText: 'Subtitulo',
+            //    ),
+            //    onChanged: (val){
+
+            //     //  mensagem =val;
+            //    },
+            //  ),
+            //  SizedBox(height: 15,),
+
              TextField( 
                keyboardType: TextInputType.multiline,
                controller: this._controllerMsg,
@@ -96,6 +126,18 @@ class _PagePostState extends State<PagePost> {
                 //  mensagem =val;
                },
              ),
+            //  SizedBox(height: 15,),
+            //    TextField( 
+            //    controller: this._controllerImgBottom,
+            //    decoration: InputDecoration(  
+            //      labelText: 'Imagem a Baixo',
+            //    ),
+            //    onChanged: (val){
+
+            //     //  mensagem =val;
+            //    },
+            //  ),
+             SizedBox(height: 15,),
              TextField( 
                controller: this._controllerAutor,
                decoration: InputDecoration(  
@@ -105,10 +147,28 @@ class _PagePostState extends State<PagePost> {
              SizedBox(height: 50,),
              ButtonBar( 
               children: [ 
+                  //  ElevatedButton( 
+                  // onPressed: (){
+
+                  // },  
+                  // child: Text('Adicionar Campos'),
+                  // ),
                   ElevatedButton( 
-                  onPressed: addDevo,  
+                  onPressed: ()async{
+                    devocionalModel.setTitulo(this._controllerTitulo.text);
+                    devocionalModel.setMensagem(this._controllerMsg.text);
+                    devocionalModel.setAutor(this._controllerAutor.text);
+                    devocionalModel.setCategoria('Devocional Diario');
+                      String formattedDate = DateFormat.yMd().format( DateTime.now());
+                
+                    devocionalModel.setData(formattedDate);
+                    await devocionalService.addDevocional(devocionalModel);
+                    Navigator.pop(context);
+
+                  },  
                   child: Text('Post'),
                   ),
+
               ],
              ),
              
@@ -125,7 +185,7 @@ class _PagePostState extends State<PagePost> {
   CollectionReference devocional = FirebaseFirestore.instance.collection('devocionais_diarios');
          return devocional.doc('devocional')
           .set({
-            'tema'     : _controllerTema.text,
+            'tema'     : _controllerTitulo.text,
             'mensagem' : _controllerMsg.text,
             'autor'    : _controllerAutor.text})
           .then((value) {
