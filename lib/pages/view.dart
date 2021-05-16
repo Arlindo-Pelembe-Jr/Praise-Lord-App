@@ -2,6 +2,7 @@
 import 'package:Praise_Lord/model/evangelho.dart';
 import 'package:Praise_Lord/model/jesusAguaViva.dart';
 import 'package:flutter/material.dart';
+import 'package:styled_text/styled_text.dart';
 
 // ignore: must_be_immutable
 class DetailPage1 extends StatefulWidget {
@@ -201,16 +202,28 @@ class ReaderPage extends StatelessWidget {
             ListView(
              padding: EdgeInsets.all(8),
              children: [
-            
-               Text(
-                 mensagem,
-                // +''+mensagem +''+mensagem +''+mensagem+''+mensagem +''+mensagem+''+mensagem +''+mensagem+''+mensagem +''+mensagem,
-                  style: TextStyle( 
-                       fontSize: 16.0,
-                       fontWeight: FontWeight.w400,
-                     ),
-                     textAlign: TextAlign.start,
-                 ),
+             StyledText(
+                    text: """$mensagem""",
+                    newLineAsBreaks: true,
+                    style: TextStyle( 
+                             fontSize: 20.6,
+                            //  fontWeight: FontWeight.bold,
+                           ),
+                    styles: {
+                      'b': TextStyle(
+                        fontWeight: FontWeight.bold
+                        ),
+                    },
+                  ),
+              //  Text(
+              //    mensagem,
+              //   // +''+mensagem +''+mensagem +''+mensagem+''+mensagem +''+mensagem+''+mensagem +''+mensagem+''+mensagem +''+mensagem,
+              //     style: TextStyle( 
+              //          fontSize: 16.0,
+              //          fontWeight: FontWeight.w400,
+              //        ),
+              //        textAlign: TextAlign.start,
+              //    ),
              ],
              ),
           ),

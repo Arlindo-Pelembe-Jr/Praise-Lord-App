@@ -1,3 +1,5 @@
+import 'package:Praise_Lord/helpers/constants.dart';
+import 'package:Praise_Lord/pages/page_post.dart';
 import 'package:Praise_Lord/utils/notficationPlugin.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -25,17 +27,52 @@ class _DevocionalDayState extends State<DevocionalDay> {
     return Scaffold(
       appBar: AppBar(  
         title: Text('Devocional Dia'),
-      ),
-      body: SingleChildScrollView(
-              child: Container(
-          padding: EdgeInsets.all(18),
-          // margin: EdgeInsets.fromLTRB(8, MediaQuery.of(context).size.height/20, 8, 0),
+        actions: [
+          IconButton(icon:Icon(Icons.add),
+         onPressed: (){
+         Navigator.of(context).push(MaterialPageRoute(builder: (context)=>PagePost(categoria: 'Devocional Dia',)));
 
-          child: Column(  
+         },
+        
+         ),
+        ],
+      ),
+      body:  SingleChildScrollView(
+              child: Column(
+                 mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                                        height: MediaQuery.of(context).size.height,
+
+                    child: Center(
+                      child: StreamBuilder<QuerySnapshot>(
+        stream: FirebaseFirestore.instance.collection(devocionalCollection)
+                                .orderBy('data')
+                                .limitToLast(1)
+                                .get()
+                                .asStream(),
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (snapshot.hasError) {
+            return Text('Something went wrong');
+          }
+
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Text("Loading");
+          }
+          return new ListView(
+            children: snapshot.data.docs.map((DocumentSnapshot document) {
+                                    Map<String,dynamic> mapa = document.data();
+                                        print("devocional day "+mapa['mensagem']);
+                      // return new ListTile(
+                      //   title: new Text(mapa['titulo']),
+                      //   subtitle: new Text(mapa['mensagem']),
+                      // );
+                      return Column(  
               children: [ 
                 // Text('ID: $id'),
                 // Divider(height: 5,),
-                // SizedBox(height: 8,),
+                SizedBox(height: 58,),
                 //  StyledText(
                 //     text: '${devocional['tema']}',
                 //      style: TextStyle( 
@@ -48,9 +85,10 @@ class _DevocionalDayState extends State<DevocionalDay> {
                 //         ),
                 //     },
                 //   ),
+    
                 Text(
                   // tema,
-                  '${devocional['tema']}',
+                  '${mapa['titulo']}',
                  style: TextStyle( 
                              fontSize: 22.6,
                              fontWeight: FontWeight.bold,
@@ -58,7 +96,7 @@ class _DevocionalDayState extends State<DevocionalDay> {
                            ),
                 SizedBox(height: 8,),
                   StyledText(
-                    text: """${devocional['mensagem']}""",
+                    text: """${mapa['mensagem']}""",
                     newLineAsBreaks: true,
                     style: TextStyle( 
                              fontSize: 20.6,
@@ -90,10 +128,17 @@ class _DevocionalDayState extends State<DevocionalDay> {
                            ),
                   )
               ],
-            ),
-          
-        ),
+            );
+            }).toList(),
+          );
+        },
+    ),
+                    ),
+                  ),
+                ],
+              ),
       ),
+              
     );
   }
  downladDevo(){
@@ -112,3 +157,118 @@ class _DevocionalDayState extends State<DevocionalDay> {
  }
 
 }
+
+//  StreamBuilder<QuerySnapshot>(
+//       stream: FirebaseFirestore.instance.collection(devocionalCollection)
+//                     .orderBy('data')
+//                     .limitToLast(1)
+//                     .get()
+//                     .asStream(),
+//       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+//         if (snapshot.hasError) {
+//           return Text('Something went wrong');
+//         }
+
+//         if (snapshot.connectionState == ConnectionState.waiting) {
+//           return Text("Loading");
+//         }
+//         return new ListView(
+//           children: snapshot.data.docs.map((DocumentSnapshot document) {
+//                         Map<String,dynamic> mapa = document.data();
+//                             print("devocional day "+mapa['mensagem']);
+//             return new ListTile(
+//               title: new Text(mapa['titulo']),
+//               subtitle: new Text(mapa['mensagem']),
+//             );
+//           }).toList(),
+//         );
+//       },
+//     ),
+
+
+// Column(  
+//               children: [ 
+//                 // Text('ID: $id'),
+//                 // Divider(height: 5,),
+//                 // SizedBox(height: 8,),
+//                 //  StyledText(
+//                 //     text: '${devocional['tema']}',
+//                 //      style: TextStyle( 
+//                 //              fontSize: 22.6,
+//                 //             //  fontWeight: FontWeight.bold,
+//                 //            ),
+//                 //     styles: {
+//                 //       'b': TextStyle(
+//                 //         fontWeight: FontWeight.bold
+//                 //         ),
+//                 //     },
+//                 //   ),
+//                 StreamBuilder<QuerySnapshot>(
+//       stream: FirebaseFirestore.instance.collection(devocionalCollection)
+//                     .orderBy('data')
+//                     .limitToLast(1)
+//                     .get()
+//                     .asStream(),
+//       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+//         if (snapshot.hasError) {
+//           return Text('Something went wrong');
+//         }
+
+//         if (snapshot.connectionState == ConnectionState.waiting) {
+//           return Text("Loading");
+//         }
+//         return new ListView(
+//           children: snapshot.data.docs.map((DocumentSnapshot document) {
+//                         Map<String,dynamic> mapa = document.data();
+
+//             return new ListTile(
+//               title: new Text(mapa['titulo']),
+//               subtitle: new Text(mapa['mensagem']),
+//             );
+//           }).toList(),
+//         );
+//       },
+//     ),
+//                 Text(
+//                   // tema,
+//                   '${devocional['tema']}',
+//                  style: TextStyle( 
+//                              fontSize: 22.6,
+//                              fontWeight: FontWeight.bold,
+//                            ),
+//                            ),
+//                 SizedBox(height: 8,),
+//                   StyledText(
+//                     text: """${devocional['mensagem']}""",
+//                     newLineAsBreaks: true,
+//                     style: TextStyle( 
+//                              fontSize: 20.6,
+//                             //  fontWeight: FontWeight.bold,
+//                            ),
+//                     styles: {
+//                       'b': TextStyle(
+//                         fontWeight: FontWeight.bold
+//                         ),
+//                     },
+//                   ),
+//                 // Divider(height: 5,),
+//                 // Text(
+//                 //   // mensagem,
+//                 //   '${devocional['tema']}',
+//                 //    style: TextStyle( 
+//                 //              fontSize: 18.6,
+//                 //             //  fontWeight: FontWeight.bold,
+//                 //            ),
+//                 //            ),
+//                 SizedBox(height: 8,),
+//                 // Divider(height: 5,),
+//                 Text(
+//                   //  'Autor: $autor',
+//                   'Autor: ${devocional['autor']}',
+//                    style: TextStyle( 
+//                              fontSize: 16.6,
+//                             //  fontWeight: FontWeight.bold,
+//                            ),
+//                   )
+//               ],
+//             ),

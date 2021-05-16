@@ -1,3 +1,8 @@
+import 'package:Praise_Lord/helpers/constants.dart';
+import 'package:Praise_Lord/helpers/screen_dimensions.dart';
+import 'package:Praise_Lord/services/evangelho_service.dart';
+import 'package:Praise_Lord/services/meditacao_service.dart';
+import 'package:Praise_Lord/widgets/custom_dropdown.dart';
 import 'package:intl/intl.dart';
 
 import 'package:Praise_Lord/model/devocional_model.dart';
@@ -6,7 +11,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 
+// ignore: must_be_immutable
 class PagePost extends StatefulWidget {
+  PagePost({this.categoria});
+  String categoria;
   @override
   _PagePostState createState() => _PagePostState();
 }
@@ -20,17 +28,17 @@ class _PagePostState extends State<PagePost> {
   // TextEditingController _controllerImgBottom = TextEditingController();
   TextEditingController _controllerMsg=TextEditingController();
   TextEditingController _controllerAutor= TextEditingController();
-  String mensagem;
+  String mensagem,meditacaoSel;
   DevocionalModel devocionalModel = DevocionalModel();
   DevocionalService devocionalService = new DevocionalService();
- 
-  
+  MeditacaoService meditacaoService = new MeditacaoService();
+  EvangelhoService evangelhoService = new EvangelhoService(); 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       // resizeToAvoidBottomInset: false,
       appBar: AppBar( 
-        title: Text('Devocional Post'),
+        title: Text('Page Post'),
         ),
      body: Stack(
        children: [
@@ -48,7 +56,7 @@ class _PagePostState extends State<PagePost> {
                   onPressed: (){
                  
                  
-                   this._controllerMsg.text+='<b>  </b>';
+                   this._controllerMsg.text+='<b> </b>';
                   },  
                   child: Text('Bold'),
                   ),
@@ -78,10 +86,22 @@ class _PagePostState extends State<PagePost> {
            child: ListView( 
              padding: EdgeInsets.all(10),
              children: <Widget>[ 
+               widget.categoria == "Meditação" 
+               ? CustomDropDownTextField(
+                 items:  meditacao, 
+                 placeholder:  "Categoria",
+                 currentSelectedValue: meditacao[0], 
+                 width: widthScreen(context),
+                 onChange: (value){
+                   meditacaoSel = value;
+                   print(meditacaoSel);
+                 },
+                 )
+                 : SizedBox(), 
                  
-             TextField( 
-               controller: this._controllerTitulo,
-               decoration: InputDecoration(  
+                TextField( 
+                controller: this._controllerTitulo,
+                decoration: InputDecoration(  
                  labelText: 'Titulo',
                ),
                onChanged: (val){
@@ -154,16 +174,13 @@ class _PagePostState extends State<PagePost> {
                   // child: Text('Adicionar Campos'),
                   // ),
                   ElevatedButton( 
-                  onPressed: ()async{
-                    devocionalModel.setTitulo(this._controllerTitulo.text);
-                    devocionalModel.setMensagem(this._controllerMsg.text);
-                    devocionalModel.setAutor(this._controllerAutor.text);
-                    devocionalModel.setCategoria('Devocional Diario');
-                      String formattedDate = DateFormat.yMd().format( DateTime.now());
-                
-                    devocionalModel.setData(formattedDate);
-                    await devocionalService.addDevocional(devocionalModel);
-                    Navigator.pop(context);
+                  onPressed: (){
+
+ 
+                      
+                    post(widget.categoria);
+                  
+                                             Navigator.pop(context);
 
                   },  
                   child: Text('Post'),
@@ -181,6 +198,46 @@ class _PagePostState extends State<PagePost> {
     );
   }
 
+ post(String campo)async{
+   var retorno;
+switch (campo) {
+                      case 'Meditação':
+                         devocionalModel.setTitulo(this._controllerTitulo.text);
+                         devocionalModel.setMensagem(this._controllerMsg.text);
+                         devocionalModel.setAutor(this._controllerAutor.text);
+                         devocionalModel.setCategoria(meditacaoSel);
+                         String formattedDate = DateFormat.yMd().format( DateTime.now());
+                
+                         devocionalModel.setData(formattedDate);
+                         retorno = meditacaoService.addMediitacao(devocionalModel);
+
+                        break;
+                        case 'Devocional Dia':
+                         devocionalModel.setTitulo(this._controllerTitulo.text);
+                         devocionalModel.setMensagem(this._controllerMsg.text);
+                         devocionalModel.setAutor(this._controllerAutor.text);
+                         devocionalModel.setCategoria('Devocional Diario');
+                         String formattedDate = DateFormat.yMd().format( DateTime.now());
+                
+                         devocionalModel.setData(formattedDate);
+                       retorno = devocionalService.addDevocional(devocionalModel);
+                        break;
+                        case 'Evangelho':
+                        devocionalModel.setTitulo(this._controllerTitulo.text);
+                         devocionalModel.setMensagem(this._controllerMsg.text);
+                         devocionalModel.setAutor(this._controllerAutor.text);
+                         devocionalModel.setCategoria('Evangelho');
+                         String formattedDate = DateFormat.yMd().format( DateTime.now());
+                
+                         devocionalModel.setData(formattedDate);
+                        retorno = evangelhoService.addEvangelho(devocionalModel);
+
+                        break;
+                      // default: print('Erro no botao post');
+                    }
+                   
+   return await retorno;
+}
   Future<void> addDevo(){
   CollectionReference devocional = FirebaseFirestore.instance.collection('devocionais_diarios');
          return devocional.doc('devocional')

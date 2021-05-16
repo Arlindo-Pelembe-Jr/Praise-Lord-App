@@ -14,7 +14,7 @@ List<String> meditacao = [
 
 ];
 
-String meditacaoCollection='devocionais',
+String meditacaoCollection ='devocionais',
 evangelhoCollection='evangelho',
 devocionalCollection='devocionais_diarios';
 

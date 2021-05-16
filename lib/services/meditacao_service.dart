@@ -1,15 +1,12 @@
 import 'package:Praise_Lord/helpers/constants.dart';
-import 'package:Praise_Lord/model/devocional.dart';
 import 'package:Praise_Lord/model/devocional_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class MeditacaoService{
 
- CollectionReference meditacao = FirebaseFirestore.instance.collection(meditacaoCollection);
+    CollectionReference<Map<String, dynamic>> meditacao = FirebaseFirestore.instance.collection(meditacaoCollection);
 
- Stream<QuerySnapshot> getMeditacaoStream(){
-   return meditacao.snapshots(includeMetadataChanges: true);
- }
+
 
 
     Future<void> addMediitacao(DevocionalModel devocionalModel) async {
@@ -18,10 +15,10 @@ class MeditacaoService{
             .then((value) => print('Meditacao Adicionado'))
             .catchError((error) => print('Falha ao Adiconar $error'));
   }
-List<String> getTitulo(QuerySnapshot snapshot){
+List<String> getTitulo(QuerySnapshot<Map<String,dynamic>> snapshot){
   List<String> titulo = [];
 
-  snapshot.docs.forEach((doc) {
+  snapshot.docs.forEach((DocumentSnapshot doc) {
     if(doc['categoria'] !=null){
       titulo.add(doc['categoria']);
       print('titulo'+titulo.toList().toString());
@@ -30,21 +27,24 @@ List<String> getTitulo(QuerySnapshot snapshot){
    return titulo;
 }
 
-List<Devocional> geMeditacao(QuerySnapshot snapshot,String categoria){
-  List<Devocional> meditacao = [];
-  
-  snapshot.docs.forEach((doc) {
-    if(doc['categoria'] == categoria){
-      Devocional devocional = Devocional.fromMap(doc.data(),doc.id);
-      meditacao.add(devocional);
-      print('data ${meditacao.toList().toString()}');
-    }
-   });
-   return meditacao.toSet().toList();
+
+
+Stream<QuerySnapshot<Map<String,dynamic>>> getMeditacaoStream(){
+  return  meditacao.snapshots(includeMetadataChanges: true);
 }
+List<DevocionalModel> getMeditacao(QuerySnapshot<Map<String,dynamic>> snapshot, String data){
+  List<DevocionalModel> devocional = [];
 
 
-
+  snapshot.docs.forEach((DocumentSnapshot doc) {  
+    if(doc['categoria'] == data){
+      DevocionalModel devocionalModel = DevocionalModel.fromJson(doc.data());
+      devocional.add(devocionalModel);
+      
+    }
+  });
+  return devocional.toSet().toList();
+}
 
 
 }

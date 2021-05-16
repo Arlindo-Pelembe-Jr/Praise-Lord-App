@@ -3,6 +3,7 @@ import 'package:Praise_Lord/helpers/constants.dart';
 import 'package:Praise_Lord/model/evangelho.dart';
 import 'package:Praise_Lord/model/jesusAguaViva.dart';
 import 'package:Praise_Lord/pages/detail_page.dart';
+import 'package:Praise_Lord/pages/evangelho_page.dart';
 import 'package:Praise_Lord/pages/view.dart';
 import 'package:Praise_Lord/widgets/custom_button.dart';
 import '../main.dart';
@@ -10,7 +11,7 @@ import 'devocionalDay.dart';
 import 'package:flutter/material.dart';
 import 'package:Praise_Lord/utils/notficationPlugin.dart';
 import 'package:Praise_Lord/widgets/card.dart';
-import 'page_post.dart';
+// import 'page_post.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -67,12 +68,14 @@ class _HomePageState extends State<HomePage> {
                                   title: 'Evangelho',
                                   onTap: (){
                                     print('tap');
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context)=> EvagelhoPage(categoria:"Evangelho",)));
+
                                   },
                                 ),
                                 CustomButton(
                                   title: 'Meditação',
                                   onTap: (){
-                                   Navigator.of(context).push(MaterialPageRoute(builder: (context)=>DetailPage()));
+                                   Navigator.of(context).push(MaterialPageRoute(builder: (context)=>DetailPage(categoria: "Meditação",)));
 
                                     print('tap');
                                   },
@@ -83,14 +86,14 @@ class _HomePageState extends State<HomePage> {
                                     print('tap');
                                   },
                                 ),
-                                 CustomButton(
-                                  title: 'Post',
-                                  onTap: (){
-                           Navigator.of(context).push(MaterialPageRoute(builder: (context)=>PagePost()));
+                          //        CustomButton(
+                          //         title: 'Post',
+                          //         onTap: (){
+                          //  Navigator.of(context).push(MaterialPageRoute(builder: (context)=>PagePost()));
   
-                                    print('tap');
-                                  },
-                                ),
+                          //           print('tap');
+                          //         },
+                          //       ),
 
                               ],
                               ),
