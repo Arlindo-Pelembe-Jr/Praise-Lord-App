@@ -34,7 +34,10 @@ class MeditationPage extends StatelessWidget {
           }
           MeditationQuerySnapshot meditationQuerySnapshot =
               snapshot.requireData;
-          return ListView.builder(
+          return ListView.separated(
+            separatorBuilder: (context, index) {
+              return const Divider();
+            },
             itemCount: meditationQuerySnapshot.docs.length,
             itemBuilder: (context, index) {
               Meditation meditation = meditationQuerySnapshot.docs[index].data;

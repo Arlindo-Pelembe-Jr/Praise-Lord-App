@@ -21,6 +21,10 @@ class Gospel {
       required this.id,
       required this.mensagem,
       required this.titulo});
+
+  factory Gospel.fromJson(Map<String, dynamic> json) => _$GospelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$GospelToJson(this);
 }
 
 @Collection<Gospel>('evangelho')

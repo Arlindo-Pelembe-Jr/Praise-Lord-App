@@ -21,6 +21,10 @@ class Meditation {
       required this.id,
       required this.mensagem,
       required this.titulo});
+  factory Meditation.fromJson(Map<String, dynamic> json) =>
+      _$MeditationFromJson(json);
+
+  Map<String, dynamic> toJson() => _$MeditationToJson(this);
 }
 
 @Collection<Meditation>('devocionais')

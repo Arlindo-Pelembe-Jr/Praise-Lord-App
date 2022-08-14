@@ -55,14 +55,14 @@ class _$MeditationCollectionReference extends _$MeditationQuery
     DocumentSnapshot<Map<String, Object?>> snapshot,
     SnapshotOptions? options,
   ) {
-    return _$MeditationFromJson(snapshot.data()!);
+    return Meditation.fromJson(snapshot.data()!);
   }
 
   static Map<String, Object?> _toFirestore(
     Meditation value,
     SetOptions? options,
   ) {
-    return _$MeditationToJson(value);
+    return value.toJson();
   }
 
   String get path => reference.path;

@@ -55,14 +55,14 @@ class _$DevotionalCollectionReference extends _$DevotionalQuery
     DocumentSnapshot<Map<String, Object?>> snapshot,
     SnapshotOptions? options,
   ) {
-    return _$DevotionalFromJson(snapshot.data()!);
+    return Devotional.fromJson(snapshot.data()!);
   }
 
   static Map<String, Object?> _toFirestore(
     Devotional value,
     SetOptions? options,
   ) {
-    return _$DevotionalToJson(value);
+    return value.toJson();
   }
 
   String get path => reference.path;

@@ -4,9 +4,12 @@ import 'package:coder_praise_lord_app/src/components/custom_button.dart';
 import 'package:coder_praise_lord_app/src/components/grid_view_count.dart';
 import 'package:coder_praise_lord_app/src/components/main_app_bar.dart';
 import 'package:coder_praise_lord_app/src/helpers/constants.dart';
+import 'package:coder_praise_lord_app/src/helpers/screen_dimensions.dart';
 import 'package:coder_praise_lord_app/src/pages/devocional/devocional_page.dart';
+import 'package:coder_praise_lord_app/src/pages/forms/post_document.dart';
 import 'package:coder_praise_lord_app/src/pages/gospel/gospel_page.dart';
 import 'package:coder_praise_lord_app/src/pages/meditation/meditation_page.dart';
+import 'package:coder_praise_lord_app/src/utils/utils.dart';
 import 'package:flutter/material.dart';
 
 import '../settings/settings_view.dart';
@@ -34,10 +37,45 @@ class HomePage extends StatelessWidget {
             childrens: [
               const Text('Praise Lord'),
               IconButton(
-                icon: const Icon(Icons.settings),
-                onPressed: () {
-                  Navigator.restorablePushNamed(
-                      context, SettingsView.routeName);
+                icon: const Icon(Icons.menu),
+                onPressed: () async {
+                  await showMenu(
+                    context: context,
+                    position: RelativeRect.fromLTRB(
+                        widthScreen(context) / 2,
+                        heightScreen(context) / 22,
+                        widthScreen(context) / 2,
+                        0),
+                    items: [
+                      const PopupMenuItem(
+                        value: 1,
+                        child: Text("Definições"),
+                      ),
+                      const PopupMenuItem(
+                        value: 2,
+                        child: Text("Criar Conteudo"),
+                      ),
+                      const PopupMenuItem(
+                        value: 3,
+                        child: Text("Sair"),
+                      ),
+                    ],
+                    elevation: 8.0,
+                  ).then((value) {
+                    switch (value) {
+                      case 1:
+                        Navigator.restorablePushNamed(
+                            context, SettingsView.routeName);
+                        break;
+                      case 2:
+                        Navigator.restorablePushNamed(
+                            context, PostDocument.routeName);
+                        break;
+                      case 3:
+                        break;
+                      default:
+                    }
+                  });
                 },
               ),
             ],

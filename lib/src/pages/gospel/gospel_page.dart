@@ -33,7 +33,10 @@ class GospelPage extends StatelessWidget {
             );
           }
           GospelQuerySnapshot gospelQuerySnapshot = snapshot.requireData;
-          return ListView.builder(
+          return ListView.separated(
+              separatorBuilder: (context, index) {
+                return const Divider();
+              },
               itemCount: gospelQuerySnapshot.docs.length,
               itemBuilder: (context, index) {
                 Gospel gospel = gospelQuerySnapshot.docs[index].data;

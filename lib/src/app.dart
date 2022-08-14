@@ -1,10 +1,16 @@
 import 'package:coder_praise_lord_app/src/controller/devocional_controller/devocional_controller.dart';
+import 'package:coder_praise_lord_app/src/controller/form_controller/post_document_controller.dart';
+import 'package:coder_praise_lord_app/src/controller/gospel_controller.dart/gospel_controller.dart';
+import 'package:coder_praise_lord_app/src/controller/meditation_controller/meditation_controller.dart';
 import 'package:coder_praise_lord_app/src/pages/devocional/devocional_page.dart';
+import 'package:coder_praise_lord_app/src/pages/forms/post_document.dart';
 import 'package:coder_praise_lord_app/src/pages/gospel/gospel_page.dart';
 import 'package:coder_praise_lord_app/src/pages/home_page.dart';
 import 'package:coder_praise_lord_app/src/pages/meditation/meditation_page.dart';
 import 'package:coder_praise_lord_app/src/pages/reader_page.dart';
 import 'package:coder_praise_lord_app/src/services/devocional_service.dart';
+import 'package:coder_praise_lord_app/src/services/gospel_service.dart';
+import 'package:coder_praise_lord_app/src/services/meditation_service.dart';
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
@@ -33,7 +39,12 @@ class MyApp extends StatelessWidget {
           create: (_) => settingsController,
         ),
         ChangeNotifierProvider(
-            create: (_) => DevocionalController(DevocionalService()))
+            create: (_) => DevocionalController(DevocionalService())),
+        ChangeNotifierProvider(create: (_) => PostDocumentController()),
+        ChangeNotifierProvider(
+            create: (_) => GospelController(GospelService())),
+        ChangeNotifierProvider(
+            create: (_) => MeditationController(MeditationService()))
       ],
       child: AnimatedBuilder(
         animation: settingsController,
@@ -85,6 +96,8 @@ class MyApp extends StatelessWidget {
                       return GospelPage();
                     case MeditationPage.routeName:
                       return MeditationPage();
+                    case PostDocument.routeName:
+                      return PostDocument();
                     case HomePage.routeName:
                     default:
                       return const HomePage();

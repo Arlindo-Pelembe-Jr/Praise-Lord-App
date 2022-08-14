@@ -21,6 +21,11 @@ class Devotional {
       required this.id,
       required this.mensagem,
       required this.titulo});
+
+  factory Devotional.fromJson(Map<String, dynamic> json) =>
+      _$DevotionalFromJson(json);
+
+  Map<String, dynamic> toJson() => _$DevotionalToJson(this);
 }
 
 @Collection<Devotional>('devocionais_diarios')

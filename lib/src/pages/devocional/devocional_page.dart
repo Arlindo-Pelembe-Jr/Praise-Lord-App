@@ -23,7 +23,7 @@ class DevocionalPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(),
       body: FirestoreBuilder<DevotionalQuerySnapshot>(
-        ref: devocionalRef.orderByData().limit(1),
+        ref: devocionalRef.limit(1).orderByData(descending: true),
         builder: (context, snapshot, child) {
           if (snapshot.hasError) {
             log(snapshot.error.toString());
@@ -45,7 +45,10 @@ class DevocionalPage extends StatelessWidget {
               snapshot.requireData;
           log(devotionalQuerySnapshot.toString());
 
-          return ListView.builder(
+          return ListView.separated(
+              separatorBuilder: (context, index) {
+                return const Divider();
+              },
               padding: const EdgeInsets.all(10),
               itemCount: devotionalQuerySnapshot.docs.length,
               itemBuilder: (context, index) {

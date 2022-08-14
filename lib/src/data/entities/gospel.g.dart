@@ -53,14 +53,14 @@ class _$GospelCollectionReference extends _$GospelQuery
     DocumentSnapshot<Map<String, Object?>> snapshot,
     SnapshotOptions? options,
   ) {
-    return _$GospelFromJson(snapshot.data()!);
+    return Gospel.fromJson(snapshot.data()!);
   }
 
   static Map<String, Object?> _toFirestore(
     Gospel value,
     SetOptions? options,
   ) {
-    return _$GospelToJson(value);
+    return value.toJson();
   }
 
   String get path => reference.path;
