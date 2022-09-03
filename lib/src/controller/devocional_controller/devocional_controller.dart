@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:coder_praise_lord_app/src/data/entities/devocional.dart';
 import 'package:coder_praise_lord_app/src/services/devocional_service.dart';
 import 'package:flutter/foundation.dart';
@@ -22,6 +23,10 @@ class DevocionalController with ChangeNotifier, DiagnosticableTreeMixin {
   void saveDevotional(Devotional devotional) async {
     await devocionalService?.addDevocional(devotional);
     notifyListeners();
+  }
+
+  Stream<QuerySnapshot> getStreamDevotionalDay() {
+    return devocionalService!.streamDevotionalDay();
   }
 
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

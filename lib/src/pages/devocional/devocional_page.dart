@@ -2,12 +2,11 @@
 
 import 'dart:developer';
 
-import 'package:cloud_firestore_odm/cloud_firestore_odm.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:coder_praise_lord_app/src/controller/devocional_controller/devocional_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/src/provider.dart';
 
-import 'package:cloud_firestore_odm/cloud_firestore_odm.dart';
 import 'package:coder_praise_lord_app/src/data/entities/devocional.dart';
 import 'package:styled_text/styled_text.dart';
 
@@ -22,9 +21,9 @@ class DevocionalPage extends StatelessWidget {
     number = context.read<DevocionalController>().getNumber;
     return Scaffold(
       appBar: AppBar(),
-      body: FirestoreBuilder<DevotionalQuerySnapshot>(
-        ref: devocionalRef.limit(1).orderByData(descending: true),
-        builder: (context, snapshot, child) {
+      body: StreamBuilder<QuerySnapshot>(
+        stream: context.read<DevocionalController>().getStreamDevotionalDay(),
+        builder: (context, snapshot) {
           if (snapshot.hasError) {
             log(snapshot.error.toString());
             return const Center(
@@ -41,26 +40,30 @@ class DevocionalPage extends StatelessWidget {
               child: Text("No Data"),
             );
           }
-          DevotionalQuerySnapshot devotionalQuerySnapshot =
-              snapshot.requireData;
-          log(devotionalQuerySnapshot.toString());
-
-          return ListView.separated(
-              separatorBuilder: (context, index) {
-                return const Divider();
-              },
-              padding: const EdgeInsets.all(10),
-              itemCount: devotionalQuerySnapshot.docs.length,
-              itemBuilder: (context, index) {
-                Devotional devotional =
-                    devotionalQuerySnapshot.docs[index].data;
-                return ListTile(
-                  title: Text(devotional.titulo.toString()),
-                  subtitle: StyledText(
-                    textAlign: TextAlign.justify,
-                    text: devotional.mensagem.toString(),
+          return ListView(
+            children:
+                snapshot.data!.docs.map((DocumentSnapshot documentSnapshot) {
+              Devotional devotional = documentSnapshot.data() as Devotional;
+              return Column(
+                children: [
+                  const SizedBox(
+                    height: 58,
+                  ),
+                  Text(
+                    '${devotional.titulo}',
                     style: const TextStyle(
-                      fontSize: 16,
+                      fontSize: 22.6,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  StyledText(
+                    text: """${devotional.mensagem}""",
+                    newLineAsBreaks: true,
+                    style: const TextStyle(
+                      fontSize: 20.6,
                     ),
                     tags: {
                       'b': StyledTextTag(
@@ -73,8 +76,19 @@ class DevocionalPage extends StatelessWidget {
                               color: Colors.green.shade400)),
                     },
                   ),
-                );
-              });
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  Text(
+                    'Autor: ${devotional.autor}',
+                    style: const TextStyle(
+                      fontSize: 16.6,
+                    ),
+                  )
+                ],
+              );
+            }).toList(),
+          );
         },
       ),
     );
